@@ -1,11 +1,11 @@
 <div class="card">
-    <img [src]="url" alt="#">
+    <img [src]="product.image" alt="#" crossorigin="anonymous">
     <div>
-        {{ Title }}
+        {{ product.name }}
     </div>
-    <form class="form-inline">
-        <label>{{ Price }}</label>
+    <div class="inline">
+        <label>{{ product.price }} &#8377;</label>
         <button class="btn btn-outline-info"><i class="fa fa-shopping-cart"></i></button>
-        <button class="btn btn-outline-info">Buy</button>
-    </form>
+        <button class="btn btn-outline-info" (click)="BuyItem()">Buy</button>
+    </div>
 </div>

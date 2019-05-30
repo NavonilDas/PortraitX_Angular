@@ -7,8 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  CompanyName: string = "Potrait X";
-  MenuItems: string[] = [""];
+  CompanyName: string = "Portrait X";
   constructor() { }
 
   ngOnInit() {
