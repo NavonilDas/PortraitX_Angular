@@ -1,7 +1,10 @@
 .container{
     display: grid;
+    position: relative;
     margin: 10px;
     width: 100%;
+    max-width: 100%;
     grid-template-columns: repeat(5,auto);
     grid-gap: 10px;
+    justify-content: center;
 }

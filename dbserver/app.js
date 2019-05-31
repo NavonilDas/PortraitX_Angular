@@ -88,11 +88,21 @@ app.post('/api/addtocart/:uid/:pid', (req, res) => {
             res.json({ err: 1 });
             throw err;
         }
-        res.json({err:0});
+        res.json({ err: 0 });
+    });
+});
+app.post('/api/delcart/:uid/:pid', (req, res) => {
+    let query = `DELETE FROM cart WHERE uid = ${req.params.uid} AND pid = ${req.params.pid};`;
+    db.query(query, (err, resl, fiel) => {
+        if (err) {
+            res.json({ err: 1 });
+            throw err;
+        }
+        res.json({ err: 0 });
     });
 });
 app.post('/api/cart/:uid', (req, res) => {
-    let getProduct = `SELECT product.* FROM product,cart where product.id = cart.pid and cart.uid = ${req.params.uid};`;
+    let getProduct = `SELECT DISTINCT product.* FROM product,cart where product.id = cart.pid and cart.uid = ${req.params.uid};`;
     db.query(getProduct, (err, resl, fiel) => {
         if (err) {
             res.json({ err: 1 });

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '../models/Product';
+import { ProductServiceService } from '../Service/product-service.service';
 
 @Component({
   selector: 'app-card',
@@ -8,14 +9,18 @@ import { Product } from '../models/Product';
 })
 export class CardComponent implements OnInit {
 
-  Title: string = "Product 1";
-  Price: number = 100;
+  cStyle:string = "btn btn-outline-info";
   @Input() product: Product;
-  constructor() { }
+  constructor(private prodService: ProductServiceService) { }
 
   ngOnInit() {
   }
   BuyItem() {
     console.log("item buy" + this.product.id)
+  }
+  addToCart(e) {
+    // fetch user id
+    this.prodService.addToCart(0, this.product.id).subscribe(val => console.log(val));
+    this.cStyle = "btn btn-success";
   }
 }

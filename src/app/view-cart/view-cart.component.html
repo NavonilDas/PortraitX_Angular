@@ -1,7 +1,7 @@
 <div>
   <div class="veiw-cart-container">
     <div>
-      <app-cart-item *ngFor="let item of cartitems" [citem]="item"></app-cart-item>
+      <app-cart-item *ngFor="let item of cartitems" [citem]="item" (deleteItem)="delCartItem($event)"></app-cart-item>
     </div>
   </div>
   <form>

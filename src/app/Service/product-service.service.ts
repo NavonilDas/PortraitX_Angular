@@ -22,6 +22,12 @@ export class ProductServiceService {
   viewCart(uid: number): Observable<Product[]> {
     return this.httpc.post<Product[]>(`${this.url}/cart/${uid}`, {}, myheader);
   }
+  addToCart(uid:number,pid:number){
+    return this.httpc.post(`${this.url}/addtocart/${uid}/${pid}`,{},myheader);
+  }
+  delFromCart(uid:number,pid:number){
+    return this.httpc.post(`${this.url}/delcart/${uid}/${pid}`,{},myheader);
+  }
   buyProduct() {
   }
 }

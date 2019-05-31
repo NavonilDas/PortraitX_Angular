@@ -17,7 +17,10 @@ export class ViewCartComponent implements OnInit {
       this.cartitems = val;
       val.forEach((v) => this.Price += v.price);
     });
-
   }
-
+  delCartItem(ev: Product) {
+    this.cartitems = this.cartitems.filter((val) => val.id !== ev.id);
+    this.citems.delFromCart(0, ev.id).subscribe(val => console.log(val));
+    this.Price -= ev.price;
+  }
 }

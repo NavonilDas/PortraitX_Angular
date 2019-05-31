@@ -6,8 +6,8 @@
     <div class="inline">
         <label>{{ product.price }} &#8377;</label>
 
-        <button class="btn btn-outline-info"><i class="fa fa-shopping-cart"></i></button>
+        <button [ngClass]="[cStyle]" (click)="addToCart()"><i class="fa fa-shopping-cart"></i></button>
 
-        <button class="btn btn-outline-info" (click)="BuyItem()">Buy</button>
+        <button class="btn btn-outline-info btn-buy" (click)="BuyItem()">Buy</button>
     </div>
 </div>
