@@ -4,10 +4,19 @@
       <app-cart-item *ngFor="let item of cartitems" [citem]="item" (deleteItem)="delCartItem($event)"></app-cart-item>
     </div>
   </div>
-  
-  <form>
-    <label>{{ Price }} &#8377;</label>
-    <button class="btn btn-success">Checkout  <i class="fa fa-inr"></i></button>
-  </form>
+
+  <div *ngIf="!nodata" class="nodata">
+    <div>
+      <img src="https://freepngimg.com/save/36860-sad-emoji-transparent-image/480x480">
+      <h1>No Items in cart</h1>
+    </div>
+  </div>
+
+  <div class="bar">
+    <form>
+      <label>{{ Price }} &#8377;</label>
+      <button class="btn btn-success">Checkout <i class="fa fa-inr"></i></button>
+    </form>
+  </div>
 
 </div>

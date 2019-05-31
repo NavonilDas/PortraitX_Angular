@@ -9,3 +9,33 @@
     box-shadow: 2px 2px 8px rgba(0,0,0,0.4);
     margin-top:10px;
 }
+div.bar{
+    width:100%;
+    display: flex;
+    margin-top:50px;
+}
+
+div.bar > form{
+    margin:auto;
+    font-size: 2em;
+}
+
+div.bar > form button{
+    margin-left: 10px;
+}
+
+div.nodata{
+    display: flex;
+    width:100%;
+    margin-top:100px;
+}
+
+div.nodata div{
+    margin:auto; 
+    text-align: center;
+}
+
+div.nodata img{
+    width:200px;
+    height: 200px;
+}

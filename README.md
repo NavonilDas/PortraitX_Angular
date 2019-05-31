@@ -11,4 +11,4 @@ node app.js
 ng serve
 ```
 # Demo
-![Screenshot](Screenshot.png)
+![Screenshot](ScreenRecord.gif)

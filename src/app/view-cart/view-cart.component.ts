@@ -10,17 +10,20 @@ import { Product } from '../models/Product';
 export class ViewCartComponent implements OnInit {
   cartitems: Product[];
   Price: number = 0;
+  nodata:boolean = true;
   constructor(private citems: ProductServiceService) { }
 
   ngOnInit() {
     this.citems.viewCart(0).subscribe(val => {
       this.cartitems = val;
       val.forEach((v) => this.Price += v.price);
+      this.nodata = val.length > 0;
     });
   }
   delCartItem(ev: Product) {
     this.cartitems = this.cartitems.filter((val) => val.id !== ev.id);
     this.citems.delFromCart(0, ev.id).subscribe(val => console.log(val));
     this.Price -= ev.price;
+    this.nodata = this.Price != 0;
   }
 }
