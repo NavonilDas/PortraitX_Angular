@@ -17,12 +17,10 @@ export class ContainerComponent implements OnInit {
   ngOnInit() {
     this.prodService.getProducts().subscribe(prods => this.products = prods);
     let n = Math.floor(window.innerWidth / 250);
-    console.log(n)
     this.grid = this.sanitizer.bypassSecurityTrustStyle(`grid-template-columns:repeat(${n},auto);`);
   }
   resizegrid(){
     let n = Math.floor(window.innerWidth / 250);
     this.grid = this.sanitizer.bypassSecurityTrustStyle(`grid-template-columns:repeat(${n},auto);`);
-    console.log(n)
   }
 }

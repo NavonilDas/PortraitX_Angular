@@ -23,11 +23,11 @@
       </li>
 
     </ul>
-    <form class="form-inline" action="/veiwCart">
-      <button class="btn btn-outline-info" type="submit">
+    <form class="form-inline">
+      <button class="btn btn-outline-info" type="submit" [routerLink]="['viewCart']">
           <i class="fa fa-shopping-cart"></i>
       </button>
-      <button class="btn btn-outline-info">Sign In</button>
+      <button class="btn btn-outline-info" [routerLink]="['signin']">Sign In</button>
     </form>
 
   </div>

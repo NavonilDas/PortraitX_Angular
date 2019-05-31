@@ -9,9 +9,10 @@ import { FooterComponent } from './footer/footer.component';
 import { CardComponent } from './card/card.component';
 import { ContainerComponent } from './container/container.component';
 import { ViewCartComponent } from './view-cart/view-cart.component';
-import { AboutpageComponent } from './aboutpage/aboutpage.component';
+import { AboutpageComponent } from './page/aboutpage/aboutpage.component';
 import { CustomizeComponent } from './customize/customize.component';
 import { CartItemComponent } from './view-cart/cart-item/cart-item.component';
+import { SigninComponent } from './page/signin/signin.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { CartItemComponent } from './view-cart/cart-item/cart-item.component';
     AboutpageComponent,
     CustomizeComponent,
     CartItemComponent,
+    SigninComponent,
   ],
   imports: [
     BrowserModule,

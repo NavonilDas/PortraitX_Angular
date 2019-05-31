@@ -4,7 +4,10 @@
       <app-cart-item *ngFor="let item of cartitems" [citem]="item" (deleteItem)="delCartItem($event)"></app-cart-item>
     </div>
   </div>
+  
   <form>
     <label>{{ Price }} &#8377;</label>
+    <button class="btn btn-success">Checkout  <i class="fa fa-inr"></i></button>
   </form>
+
 </div>
