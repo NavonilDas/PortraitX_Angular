@@ -1,31 +1,27 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../models/Product';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+const myheader = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json'
+  })
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductServiceService {
+  url: string = "http://localhost:1011/api";
+  constructor(private httpc: HttpClient) { }
 
-  constructor() { }
-
-  getProducts():Product[]{
-    return [
-      {
-        id:1,
-        name:"APJ Abdul Kalam",
-        price:200,
-        image:"https://i.ibb.co/hswc83c/portrait-painting-500x500.jpg",
-        purchased:false
-      },
-      {
-        id:2,
-        name:"Boy Painting",
-        price:300,
-        image:"https://i.ibb.co/nBrdtt1/il-570x-N-1307185578-6qon.jpg",
-        purchased:false        
-      }
-    ];
+  getProducts(): Observable<Product[]> {
+    return this.httpc.post<Product[]>(`${this.url}/allproducts`, {}, myheader);
   }
-  buyProduct(){
+  viewCart(uid: number): Observable<Product[]> {
+    return this.httpc.post<Product[]>(`${this.url}/cart/${uid}`, {}, myheader);
+  }
+  buyProduct() {
   }
 }

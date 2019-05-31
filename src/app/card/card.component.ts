@@ -8,14 +8,14 @@ import { Product } from '../models/Product';
 })
 export class CardComponent implements OnInit {
 
-  Title:string = "Product 1";
-  Price:number = 100;
-  @Input() product:Product;
+  Title: string = "Product 1";
+  Price: number = 100;
+  @Input() product: Product;
   constructor() { }
 
   ngOnInit() {
   }
-  BuyItem(){
-    console.log("item buy"+this.product.id)
+  BuyItem() {
+    console.log("item buy" + this.product.id)
   }
 }

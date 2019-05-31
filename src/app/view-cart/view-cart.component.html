@@ -1,3 +1,10 @@
-<p>
-  view-cart works!
-</p>
+<div>
+  <div class="veiw-cart-container">
+    <div>
+      <app-cart-item *ngFor="let item of cartitems" [citem]="item"></app-cart-item>
+    </div>
+  </div>
+  <form>
+    <label>{{ Price }} &#8377;</label>
+  </form>
+</div>

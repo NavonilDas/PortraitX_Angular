@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ProductServiceService } from '../Service/product-service.service';
+import { Product } from '../models/Product';
 
 @Component({
   selector: 'app-view-cart',
@@ -6,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./view-cart.component.css']
 })
 export class ViewCartComponent implements OnInit {
-
-  constructor() { }
+  cartitems: Product[];
+  Price: number = 0;
+  constructor(private citems: ProductServiceService) { }
 
   ngOnInit() {
+    this.citems.viewCart(0).subscribe(val => {
+      this.cartitems = val;
+      val.forEach((v) => this.Price += v.price);
+    });
+
   }
 
 }

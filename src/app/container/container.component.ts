@@ -15,7 +15,7 @@ export class ContainerComponent implements OnInit {
   constructor(private prodService:ProductServiceService) { }
 
   ngOnInit() {
-    this.products = this.prodService.getProducts();
+    this.prodService.getProducts().subscribe(prods => this.products = prods);
   }
 
 }

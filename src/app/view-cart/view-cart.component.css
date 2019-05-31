@@ -1,0 +1,11 @@
+.veiw-cart-container{
+    display: grid;
+    grid-template-columns: auto 500px auto;
+    grid-template-areas: ". main .";
+}
+.veiw-cart-container > div{
+    grid-area: main;
+    width: 100%;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+    margin-top:10px;
+}
