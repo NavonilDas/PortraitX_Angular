@@ -2,9 +2,11 @@
   <div>
 
     <div class="sform">
-      <i class="fa fa-user"></i><input type="text" placeholder="user@email.com" />
-      <i class="fa fa-lock"></i><input type="password" />
-      <i></i><button>Log in</button>
+      <i class="fa fa-user"></i>
+      <input required minlength="3" ngModel name="email" #emailText="ngModel" (change)="log(emailText)" type="text"
+        placeholder="user@email.com" />
+      <i class="fa fa-lock"></i><input type="password" #passText />
+      <i></i><button (click)="Login(emailText.value,passText.value)">Log in</button>
     </div>
 
     <a href="/signup">Create Account</a>

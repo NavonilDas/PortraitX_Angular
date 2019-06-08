@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '../models/Product';
 import { ProductServiceService } from '../Service/product-service.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-card',
@@ -9,18 +10,19 @@ import { ProductServiceService } from '../Service/product-service.service';
 })
 export class CardComponent implements OnInit {
 
-  cStyle:string = "btn btn-outline-info";
+  cStyle: string = "btn btn-outline-info";
   @Input() product: Product;
-  constructor(private prodService: ProductServiceService) { }
+  constructor(private prodService: ProductServiceService, private cookie: CookieService) { }
 
   ngOnInit() {
   }
   BuyItem() {
     console.log("item buy" + this.product.id)
   }
-  addToCart(e) {
+  addToCart() {
     // fetch user id
-    this.prodService.addToCart(0, this.product.id).subscribe(val => console.log(val));
+    if (this.cookie.get("id"))
+      this.prodService.addToCart(this.cookie.get("id"), this.product.id).subscribe(val => console.log(val));
     this.cStyle = "btn btn-success";
   }
 }

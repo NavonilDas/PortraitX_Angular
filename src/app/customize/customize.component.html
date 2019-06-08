@@ -1,8 +1,39 @@
-<div>
+<div class="customform">
   <h1>Buy A Custom Painting</h1>
-  <form>
-    <label>Upload an Image</label>
-    <input type="file">
+
+  <img [src]="isUpload" *ngIf="isUpload != undefined">
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" name="form">
+    <h4>Upload an Image</h4>
+    <input type="file" (change)="onFileChange($event)" name="fileselector">
     <button>Upload</button>
   </form>
+
+  <div>
+    <label>Add a Frame to the Potrait</label>
+    <input ngModel #frame="ngModel" type="checkbox" name="isFrame">
+  </div>
+
+  <div *ngIf="frame.value"> Checked </div>
+
+  <div>
+    <h4>Potrait Type</h4>
+    <app-radiogrp [options]="types" (valueChange)="mylog($event)"></app-radiogrp>
+  </div>
+
+  <div>
+    <h4>Number of Peoples/Charecters</h4>
+    <app-radiogrp [options]="chars" (valueChange)="mylog($event)"></app-radiogrp>
+  </div>
+
+  <div>
+    <h4>Please Describe what you want.</h4>
+    <textarea minlength="50"></textarea>
+  </div>
+
+  <div>
+    <h4> Shipping </h4>
+    <app-radiogrp [options]="ships" (valueChange)="mylog($event)"></app-radiogrp>
+  </div>
+
 </div>

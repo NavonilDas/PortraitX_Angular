@@ -19,15 +19,22 @@ export class ProductServiceService {
   getProducts(): Observable<Product[]> {
     return this.httpc.post<Product[]>(`${this.url}/allproducts`, {}, myheader);
   }
-  viewCart(uid: number): Observable<Product[]> {
-    return this.httpc.post<Product[]>(`${this.url}/cart/${uid}`, {}, myheader);
+  viewCart(uid: string): Observable<Product[]> {
+    const fd = new FormData();
+    fd.append("id", uid);
+    return this.httpc.post<Product[]>(`${this.url}/cart`, fd);
   }
-  addToCart(uid:number,pid:number){
-    return this.httpc.post(`${this.url}/addtocart/${uid}/${pid}`,{},myheader);
+  addToCart(uid: string, pid: number) {
+    const fd = new FormData();
+    fd.append("id", uid);
+    return this.httpc.post(`${this.url}/addtocart/${pid}`, fd);
   }
-  delFromCart(uid:number,pid:number){
-    return this.httpc.post(`${this.url}/delcart/${uid}/${pid}`,{},myheader);
+  delFromCart(uid: number, pid: number) {
+    return this.httpc.post(`${this.url}/delcart/${uid}/${pid}`, {}, myheader);
   }
   buyProduct() {
+  }
+  uploadImage(data: FormData): Observable<any> {
+    return this.httpc.post<any>(`${this.url}/addimage`, data);
   }
 }

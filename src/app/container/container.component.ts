@@ -9,17 +9,17 @@ import { DomSanitizer, SafeResourceUrl, SafeUrl, SafeStyle } from '@angular/plat
   styleUrls: ['./container.component.css']
 })
 export class ContainerComponent implements OnInit {
-  grid:SafeStyle;
-  products:Product[];
+  grid: SafeStyle;
+  products: Product[];
 
-  constructor(private prodService:ProductServiceService,private sanitizer:DomSanitizer) { }
+  constructor(private prodService: ProductServiceService, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     this.prodService.getProducts().subscribe(prods => this.products = prods);
     let n = Math.floor(window.innerWidth / 250);
     this.grid = this.sanitizer.bypassSecurityTrustStyle(`grid-template-columns:repeat(${n},auto);`);
   }
-  resizegrid(){
+  resizegrid() {
     let n = Math.floor(window.innerWidth / 250);
     this.grid = this.sanitizer.bypassSecurityTrustStyle(`grid-template-columns:repeat(${n},auto);`);
   }

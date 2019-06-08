@@ -1,0 +1,34 @@
+.signupform {
+    display: flex;
+    margin-top: 10px;
+    min-height: 80vh;
+}
+
+.signupform > div{
+    margin: auto auto;
+}
+
+form.signup {
+    width: 500px;
+    margin: auto auto;
+    display: flex;
+    flex-direction: column;
+}
+
+form.signup>div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 10px;
+}
+
+form>textarea {
+    margin-bottom: 10px;
+}
+
+.errors {
+    color: red;
+}
+
+.logErr{
+    color:red;
+}

@@ -1,0 +1,46 @@
+<div class="signupform">
+  <form *ngIf="login == 1" class="signup">
+
+    <div>
+      <label for="name">Name</label>
+      <input ngModel required #name="ngModel" type="text" name="name" id="name">
+    </div>
+
+    <div>
+      <label for="email">Email *</label>
+      <input ngModel #email="ngModel" required type="text" name="email">
+    </div>
+
+    <div *ngIf="email.touched && email.errors !=null" class="errors">
+      Please enter an email.
+    </div>
+
+    <div>
+      <label for="pass">Password *</label>
+      <input minlength="8" ngModel #pass="ngModel" required type="password" name="pass" (change)="log(pass)">
+    </div>
+
+    <div *ngIf="pass.touched && pass.errors != null" class="error">
+      <div *ngIf="pass.errors.minlength">The minimum length of the password is 8.</div>
+    </div>
+
+    <label for="address">Address *</label>
+    <textarea required maxlength="100" ngModel #addr="ngModel" name="address" id="" cols="30" rows="10"></textarea>
+
+    <div>
+      <label for="phNo">Phone Number *</label>
+      <input required #phNo name="phNo" type="tel">
+    </div>
+
+    <button type="submit" class="btn btn-outline-info"
+      (click)="AddUser(name.value,email.value,pass.value,addr.value,phNo.value)">Submit</button>
+  </form>
+
+  <div *ngIf="login == 0" style="color: greenyellow">
+    Account Created Please Login.
+  </div>
+
+  <div *ngIf="login != 1" class="logErr">
+    <div *ngIf="login == 255">Email Already existed.</div>
+  </div>
+</div>

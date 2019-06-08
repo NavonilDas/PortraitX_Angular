@@ -1,0 +1,4 @@
+<div class="radiogrp" *ngFor="let opt of options;let i = index">
+  <input type="radio" [id]="Replace(opt)" [name]="name" (change)="radiogrpchange(i)">
+  <label [for]="Replace(opt)">{{ opt }}</label>
+</div>

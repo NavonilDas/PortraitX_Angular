@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ProductServiceService } from '../Service/product-service.service';
 import { Product } from '../models/Product';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-view-cart',
@@ -11,14 +12,16 @@ export class ViewCartComponent implements OnInit {
   cartitems: Product[];
   Price: number = 0;
   nodata:boolean = true;
-  constructor(private citems: ProductServiceService) { }
+  constructor(private citems: ProductServiceService,private cookie:CookieService) { }
 
   ngOnInit() {
-    this.citems.viewCart(0).subscribe(val => {
-      this.cartitems = val;
-      val.forEach((v) => this.Price += v.price);
-      this.nodata = val.length > 0;
-    });
+    const id = this.cookie.get("id");
+    if(id)
+      this.citems.viewCart(id).subscribe(val => {
+        this.cartitems = val;
+        val.forEach((v) => this.Price += v.price);
+        this.nodata = val.length > 0;
+      });
   }
   delCartItem(ev: Product) {
     this.cartitems = this.cartitems.filter((val) => val.id !== ev.id);

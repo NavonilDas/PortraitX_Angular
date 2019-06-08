@@ -1,0 +1,11 @@
+.customform{
+    display: flex;
+    flex-direction: column;
+}
+
+.customform  textarea{
+    min-width: 300px;
+    height: 100px;
+    resize: none;
+    padding: 8px;
+}
