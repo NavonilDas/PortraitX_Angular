@@ -1,0 +1,42 @@
+<div>
+
+  <app-errors *ngIf="!isAdmin" ErrorCode="403"></app-errors>
+
+  <div *ngIf="isAdmin" class="add-product">
+
+    <div *ngIf="Done">
+      Done Upload
+    </div>
+
+    <div *ngIf="Error">
+      Some Error Occured
+    </div>
+
+    <form [formGroup]="form">
+      <div>
+        <h4>Title</h4>
+        <input #title type="text" name="title" id="title">
+      </div>
+
+      <div>
+        <h4>Image</h4>
+        <input type="file" name="imageSelector" id="image" (change)="ImageChange($event)">
+      </div>
+
+      <div>
+        <h4>Price</h4>
+        <input #price type="number" name="price" id="price">
+      </div>
+
+      <div>
+        <h4>Description</h4>
+        <textarea #desp name="Description" id="Description" cols="30" rows="10"></textarea>
+      </div>
+
+      <button class="btn btn-success" (click)="Submit(title.value,price.value,desp.value)">Submit</button>
+      
+      <input type="reset" value="Reset" class="btn btn-danger" style="margin-left:10px;">
+
+    </form>
+  </div>
+</div>

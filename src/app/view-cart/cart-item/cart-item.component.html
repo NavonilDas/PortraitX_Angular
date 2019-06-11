@@ -1,5 +1,5 @@
 <div class="cart-item">
-  <img [src]="citem.image" width="50px" height="50px">
+  <img [src]="GetImageURL(citem.image)" width="50px" height="50px">
   <label>{{ citem.name }}</label>
   <label>{{ citem.price }}</label>
   <button class="btn btn-danger" (click)="delFromCart()">Delete</button>

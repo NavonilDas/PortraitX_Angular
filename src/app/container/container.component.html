@@ -1,3 +1,7 @@
-<div class="container card-container" (window:resize)="resizegrid()" [style]="grid">
-  <app-card *ngFor="let product of products" [product]="product"></app-card>
+<div>
+  <h4>Printed Painting</h4>
+  <div class="container card-container" (window:resize)="resizegrid()" [style]="grid"
+    *ngIf="products && products.length > 0">
+    <app-card *ngFor="let product of products" [product]="product"></app-card>
+  </div>
 </div>

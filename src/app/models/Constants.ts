@@ -1,0 +1,1 @@
+export const IMAGEURL = "http://localhost:1011";

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '../models/Product';
 import { ProductServiceService } from '../Service/product-service.service';
 import { CookieService } from 'ngx-cookie-service';
+import { IMAGEURL } from '../models/Constants';
 
 @Component({
   selector: 'app-card',
@@ -18,6 +19,9 @@ export class CardComponent implements OnInit {
   }
   BuyItem() {
     console.log("item buy" + this.product.id)
+  }
+  GetImageUrl(e){
+    return IMAGEURL+e;
   }
   addToCart() {
     // fetch user id

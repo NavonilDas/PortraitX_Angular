@@ -8,6 +8,10 @@ import { CustomizeComponent } from './customize/customize.component';
 import { SigninComponent } from './page/signin/signin.component';
 import { SignupComponent } from './page/signup/signup.component';
 import { GalleryComponent } from './page/gallery/gallery.component';
+import { ProfileComponent } from './page/profile/profile.component';
+import { ViewOrdersComponent } from './page/view-orders/view-orders.component';
+import { HelpComponent } from './page/help/help.component';
+import { AddProductComponent } from './Admin/add-product/add-product.component';
 
 
 const routes: Routes = [
@@ -17,7 +21,12 @@ const routes: Routes = [
     { path: 'gallery', component: GalleryComponent },
     { path: 'signin', component: SigninComponent },
     { path: 'signup', component: SignupComponent },
-    { path: 'viewCart', component: ViewCartComponent }
+    { path: 'viewCart', component: ViewCartComponent },
+    { path: 'orders', component: ViewOrdersComponent },
+    { path: 'help', component: HelpComponent },
+    { path: 'profile', component: ProfileComponent },
+    //// Admin Pages
+    { path: 'admin/addproduct',component:AddProductComponent}
 ];
 
 @NgModule({

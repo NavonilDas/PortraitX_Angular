@@ -1,39 +1,66 @@
-<div class="customform">
+<div>
   <h1>Buy A Custom Painting</h1>
 
-  <img [src]="isUpload" *ngIf="isUpload != undefined">
+  <div class="customform">
+    <div>
 
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" name="form">
-    <h4>Upload an Image</h4>
-    <input type="file" (change)="onFileChange($event)" name="fileselector">
-    <button>Upload</button>
-  </form>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" name="form">
+        <h4>Upload an Image<span class="required">*</span></h4>
+        <input type="file" (change)="onFileChange($event)" name="fileselector">
+        <button>Upload</button>
+      </form>
 
-  <div>
-    <label>Add a Frame to the Potrait</label>
-    <input ngModel #frame="ngModel" type="checkbox" name="isFrame">
+      <div *ngIf="isUpload != undefined">
+        <div class="">
+          <h3>Do you Need Frame for Potrait ? </h3>
+          <app-radiogrp [options]="choice" (valueChange)="Frame($event)"></app-radiogrp>
+        </div>
+
+        <div *ngIf="this.frameImage != undefined">
+          <h4>Select A Frame Design. <span class="required">*</span></h4>
+
+        </div>
+
+        <div>
+          <h4>Potrait Type<span class="required">*</span></h4>
+          <app-radiogrp [options]="types" (valueChange)="mylog($event)"></app-radiogrp>
+        </div>
+
+        <div>
+          <h4>Number of Peoples/Charecters<span class="required">*</span></h4>
+          <app-radiogrp [options]="chars" (valueChange)="mylog($event)"></app-radiogrp>
+        </div>
+
+        <div>
+          <h4>Please Describe what you want. <span class="required">*</span></h4>
+          <textarea minlength="10" required></textarea>
+        </div>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" name="form">
+          <h4>Upload an Alternative Image <span class="optional">(optional)</span></h4>
+          <input type="file" (change)="onFileChange($event)" name="fileselector">
+          <button>Upload</button>
+        </form>
+
+        <div>
+          <h4> Shipping <span class="required">*</span></h4>
+          <app-radiogrp [options]="ships" (valueChange)="mylog($event)"></app-radiogrp>
+        </div>
+
+        <div>
+          <h4>Quantity<span class="required">*</span></h4>
+          <app-numericbox></app-numericbox>
+        </div>
+
+        <button class="btn btn-success">Checkout</button>
+      </div>
+
+    </div>
+
+    <div>
+      <img [src]="isUpload" *ngIf="isUpload != undefined" class="uploaded">
+      <label>Price : </label>
+    </div>
+
   </div>
-
-  <div *ngIf="frame.value"> Checked </div>
-
-  <div>
-    <h4>Potrait Type</h4>
-    <app-radiogrp [options]="types" (valueChange)="mylog($event)"></app-radiogrp>
-  </div>
-
-  <div>
-    <h4>Number of Peoples/Charecters</h4>
-    <app-radiogrp [options]="chars" (valueChange)="mylog($event)"></app-radiogrp>
-  </div>
-
-  <div>
-    <h4>Please Describe what you want.</h4>
-    <textarea minlength="50"></textarea>
-  </div>
-
-  <div>
-    <h4> Shipping </h4>
-    <app-radiogrp [options]="ships" (valueChange)="mylog($event)"></app-radiogrp>
-  </div>
-
 </div>

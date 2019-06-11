@@ -30,9 +30,15 @@ export class DbuserService {
     fd.append("id", this.cookie.get("id"));
     return this.https.post<any>(`${this.url}/isadmin`, fd);
   }
-  isValid() {
+  isValid():Observable<any> {
     const fd = new FormData();
     fd.append("id", this.cookie.get("id"));
     return this.https.post<any>(`${this.url}/valid`, fd);
+  }
+
+  getMenuList():Observable<any>{
+    const fd = new FormData();
+    fd.append("id", this.cookie.get("id"));
+    return this.https.post<any>(`${this.url}/menu/signin`, fd);
   }
 }

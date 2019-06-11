@@ -35,6 +35,7 @@ function getPass(password) {
 
 app.use(express.static(path.join(__dirname, '/')));
 
+// LOGIN API
 app.post('/api/signup', (req, res) => {
     const {
         name, email, password, address, phNo
@@ -52,11 +53,10 @@ app.post('/api/signup', (req, res) => {
         });
     } catch (ex) { }
 });
-
 app.post('/api/login', (req, res) => {
     const email = req.fields.email;
     const pass = getPass(req.fields.pass);
-    const query = `SELECT id,name FROM users WHERE email = '${email}' AND password = '${pass}';`
+    const query = `SELECT id,name,role FROM users WHERE email = '${email}' AND password = '${pass}';`
     db.query(query, (err, resl, _) => {
         if (err) {
             console.log(err);
@@ -68,6 +68,7 @@ app.post('/api/login', (req, res) => {
                 jwt.sign({
                     id: resl[0].id,
                     name: resl[0].name,
+                    role: resl[0].role,
                     email: email
                 }, secretKey, { expiresIn: '1d' }, (err, token) => {
                     res.json({ id: token, err: 0 });
@@ -76,7 +77,35 @@ app.post('/api/login', (req, res) => {
         }
     })
 });
-
+app.post('/api/menu/signin', (req, res) => {
+    jwt.verify(req.fields.id, secretKey, (err, authData) => {
+        if (err) {
+            res.json({ err: true });
+        } else {
+            const role = authData.role;
+            let menu = [
+                { title: "Orders", path: "/orders" },
+                { title: "Profile", path: "/profile" }
+            ];
+            if (role == 101) {
+                menu = [
+                    { title: 'Paintings', path: '/admin/addproduct' },
+                    { title: 'Queues', path: '/admin/queues' },
+                    { title: 'Uploader', path: '/admin/uploader' },
+                    { title: 'Sold', path: '/admin/sold' }
+                ]
+            }
+            if (role == 786) {
+                // Painter
+            }
+            res.json({
+                name: authData.name,
+                err: false,
+                menu: menu
+            });
+        }
+    });
+});
 app.post('/api/valid', (req, res) => {
     jwt.verify(req.fields.id, secretKey, (err, _) => {
         if (err) {
@@ -86,30 +115,6 @@ app.post('/api/valid', (req, res) => {
         }
     });
 });
-
-app.post('/api/allproducts', (req, res) => {
-    let getProduct = `select * from product;`;
-    db.query(getProduct, (err, resl, fiel) => {
-        if (err) {
-            res.json({ err: 1 });
-            throw err;
-        }
-        res.json(resl);
-    });
-});
-
-app.post('/api/getproduct/:id', (req, res) => {
-    if (req.params.id == null || req.params.id == undefined) throw "ERRRRR";
-    const getProduct = "SELECT * FROM product WHERE id = " + req.params.id;
-    db.query(getProduct, (err, resl, fiel) => {
-        if (err) {
-            res.json({ err: 1 });
-            throw err;
-        }
-        res.json(resl);
-    });
-});
-
 app.post('/api/isadmin', (req, res) => {
     jwt.verify(req.fields.id, secretKey, (err, authData) => {
         if (err) {
@@ -127,19 +132,54 @@ app.post('/api/isadmin', (req, res) => {
     });
 });
 
-app.post('/api/addproduct', (req, res) => {
-    jwt.verify(req.fields.id, secretKey, (err, authData) => {
+///// PRODUCT API
+app.post('/api/allproducts', (req, res) => {
+    let getProduct = `select id,price,title,image from products WHERE hide <> 1;`;
+    db.query(getProduct, (err, resl, fiel) => {
         if (err) {
             res.json({ err: 1 });
+            throw err;
+        }
+        res.json(resl);
+    });
+});
+app.post('/api/getproduct/:id', (req, res) => {
+    const getProduct = "SELECT * FROM products WHERE id = " + req.params.id;
+    db.query(getProduct, (err, resl, fiel) => {
+        if (err) {
+            res.json({ err: 1 });
+            throw err;
+        }
+        res.json(resl);
+    });
+});
+app.post('/api/addproduct', (req, res) => {
+    jwt.verify(req.fields.id, secretKey, (err, authData) => {
+        if (err || authData.role != 101) {
+            res.json({ err: 1 });
         } else {
-
+            const file = (req.files.file);
+            const sp = file.name.split('.');
+            const savepath = `/products/${req.fields.title.split(" ").join("_")}_${Date.now()}.${sp[sp.length - 1]}`
+            fs.copyFile(file.path, __dirname + savepath, (err) => {
+                if (err) res.json({ err: 1 });
+                else {
+                    fs.unlink(file.path, (errr) => {
+                        if (errr) console.log(errr);
+                        const query = `INSERT INTO products(title,image,price,desp,ratings) VALUE('${req.fields.title}','${savepath}',${req.fields.price},'${req.fields.description}',0)`;
+                        db.query(query, (err, resl, _) => {
+                            if (err) res.json({ err: 1 });
+                            else res.json({ err: 0 });
+                        });
+                    })
+                }
+            });
         }
     });
 });
-
 app.post('/api/delproduct/:id', (req, res) => {
-
 });
+////// CART API
 app.post('/api/addtocart/:pid', (req, res) => {
     jwt.verify(req.fields.id, secretKey, (err, authData) => {
         if (err) {
@@ -171,7 +211,7 @@ app.post('/api/cart', (req, res) => {
         if (err) {
             res.sendStatus(403);
         } else {
-            let getProduct = `SELECT DISTINCT product.* FROM product,cart where product.id = cart.pid and cart.uid = ${authData.id};`;
+            let getProduct = `SELECT DISTINCT products.* FROM products,cart where products.id = cart.pid and cart.uid = ${authData.id};`;
             db.query(getProduct, (err, resl, fiel) => {
                 if (err) {
                     res.json({ err: 1 });
@@ -183,6 +223,7 @@ app.post('/api/cart', (req, res) => {
     });
 });
 
+//// GENERIC API
 app.post('/api/addimage', (req, res) => {
     const file = (req.files.file);
     const sp = file.name.split('.');
@@ -202,5 +243,12 @@ app.post('/api/addimage', (req, res) => {
     })
 });
 
+
+fs.mkdir("products", (err) => {
+    if (err)
+        console.log("Product Directory Already Existed");
+    else
+        console.log("Product Directory Created");
+});
 
 app.listen(1011, () => console.log("Server Started at http://localhost:1011"));

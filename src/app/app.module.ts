@@ -18,6 +18,14 @@ import { SigninComponent } from './page/signin/signin.component';
 import { SignupComponent } from './page/signup/signup.component';
 import { GalleryComponent } from './page/gallery/gallery.component';
 import { RadiogrpComponent } from './Tool/radiogrp/radiogrp.component';
+import { NumericboxComponent } from './Tool/numericbox/numericbox.component';
+import { FramepickerComponent } from './Tool/framepicker/framepicker.component';
+import { ProfileComponent } from './page/profile/profile.component';
+import { ViewOrdersComponent } from './page/view-orders/view-orders.component';
+import { HelpComponent } from './page/help/help.component';
+import { AddProductComponent } from './Admin/add-product/add-product.component';
+import { ErrorsComponent } from './Tool/errors/errors.component';
+import { VeiwProductComponent } from './page/veiw-product/veiw-product.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +42,14 @@ import { RadiogrpComponent } from './Tool/radiogrp/radiogrp.component';
     SignupComponent,
     GalleryComponent,
     RadiogrpComponent,
+    NumericboxComponent,
+    FramepickerComponent,
+    ProfileComponent,
+    ViewOrdersComponent,
+    HelpComponent,
+    AddProductComponent,
+    ErrorsComponent,
+    VeiwProductComponent,
   ],
   imports: [
     BrowserModule,

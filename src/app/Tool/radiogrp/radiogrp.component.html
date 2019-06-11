@@ -1,4 +1,9 @@
 <div class="radiogrp" *ngFor="let opt of options;let i = index">
-  <input type="radio" [id]="Replace(opt)" [name]="name" (change)="radiogrpchange(i)">
-  <label [for]="Replace(opt)">{{ opt }}</label>
+  <!-- <input type="radio" [id]="Replace(opt)"> -->
+
+  <label class="container"> {{ opt }}
+    <input type="radio"  [name]="name" (change)="radiogrpchange(i)">
+    <span class="checkmark"></span>
+  </label>
+
 </div>
